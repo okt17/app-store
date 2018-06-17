@@ -1,11 +1,27 @@
 {
-    "extends": "airbnb",
-    "rules": {
-        "linebreak-style": 0,
-        "jsx-quotes": 0,
-        "react/prefer-stateless-function": 0
-    },
-    "env": {
-        "browser": true
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "linebreak-style": 0,
+    "jsx-quotes": 0,
+    "react/prefer-stateless-function": 0,
+    "react/require-default-props": 0,
+    "react/forbid-prop-types": 0,
+    "one-var": 0,
+    "no-mixed-operators": 0,
+    "import/extensions": 0
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      },
+      "alias": [
+        ["app", "./src"]
+      ]
     }
+  }
 }

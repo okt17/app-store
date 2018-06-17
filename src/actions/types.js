@@ -1,0 +1,9 @@
+export const SET_DEVICE = 'SET_DEVICE';
+
+export const SET_APPS = 'SET_APPS';
+
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+
+export const FETCH_DATA_FOR_DEVICE = 'FETCH_DATA_FOR_DEVICE';
+
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';

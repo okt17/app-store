@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import store from './store';
 import App from './components/App';
+import { fetchDataForDevice } from './actions';
+import './style';
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    selectedDevice: state.selectedDevice,
+    isLoading: state.fetchingForDevice !== undefined,
+    categories: state.categories,
+    apps: state.apps,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    onSwitcherButtonClick: platform => dispatch(fetchDataForDevice(platform)(dispatch)),
   };
 }
 

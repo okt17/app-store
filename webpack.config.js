@@ -1,12 +1,14 @@
 var
   path = require('path'),
   WebpackNotifierPlugin = require('webpack-notifier'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin'),
   BUILD_DIR = path.resolve(__dirname, 'build'),
-  APP_DIR = path.resolve(__dirname, 'src/js');
+  APP_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
-  entry: APP_DIR + '/index.jsx',
+  entry: [
+    "babel-polyfill",
+    APP_DIR + '/index.jsx'
+  ],
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
@@ -20,16 +22,23 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        include: APP_DIR,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
       }
     ]
   },
   plugins: [
     new WebpackNotifierPlugin({alwaysNotify: true}),
-    new ExtractTextPlugin({filename: 'style.css'})
   ],
   resolve: {
     alias: {
@@ -37,5 +46,6 @@ module.exports = {
     },
     enforceExtension: false,
     extensions: ['.js', '.jsx', '.scss']
-  }
+  },
+  devtool: 'source-map'
 };
