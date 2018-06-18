@@ -22,14 +22,23 @@ function getApps(data, params = {}) {
   return results;
 }
 
-function getCategories(data, params={}) {
+function getCategories(data/* , params={} */) {
   return data.categories;
 }
 
-// mimics an HTTP request behavior
+function getCollections(data/* , params={} */) {
+  return data.collections;
+}
+
+/**
+ * Mimics an HTTP request behavior
+ * @param {string} baseUrl 'apps' | 'categories' | 'collections'
+ * @param {object} params request parameters
+ * @return Promise<{ results: object[] }>
+*/
 function requestData(baseUrl, params) {
   return new Promise((resolve, reject) => {
-    const delay = 2000 * Math.random(); // handle request after 0-2 seconds
+    const delay = 1000 * Math.random(); // handle requests after up to 1 second
 
     let results;
 
@@ -40,6 +49,10 @@ function requestData(baseUrl, params) {
 
       case 'categories':
         results = getCategories(DATA, params);
+        break;
+
+      case 'collections':
+        results = getCollections(DATA, params);
         break;
 
       default:

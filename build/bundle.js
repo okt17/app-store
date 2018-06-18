@@ -13739,7 +13739,45 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".app {\n  height: 100%; }\n", ""]);
+exports.push([module.i, ".app {\n  height: 100%; }\n  .app__top-content {\n    height: 20%;\n    padding: 0.5rem; }\n  .app__main-content, .app__side-content {\n    float: left;\n    height: 80%;\n    padding: 0.5rem; }\n  .app__main-content {\n    width: 75%;\n    padding-top: 1rem; }\n  .app__side-content {\n    width: 25%; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/AppCollection/AppItem/style.scss":
+/*!****************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/AppCollection/AppItem/style.scss ***!
+  \****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".app__app-collection__app-item {\n  display: inline-block; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/AppCollection/style.scss":
+/*!********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/AppCollection/style.scss ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".app__app-collection {\n  width: 100%; }\n  .app__app-collection__header {\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none; }\n    .app__app-collection__header__view-all {\n      float: right;\n      cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -13777,7 +13815,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".app__switcher {\n  margin: 0 auto; }\n", ""]);
+exports.push([module.i, ".app__switcher {\n  margin: 0.5rem !important; }\n", ""]);
 
 // exports
 
@@ -78243,8 +78281,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 exports.setDevice = setDevice;
 exports.setApps = setApps;
 exports.setCategories = setCategories;
-exports.fetchDataForDevice = fetchDataForDevice;
+exports.setCollections = setCollections;
+exports.fetchAppsForDevice = fetchAppsForDevice;
 exports.fetchCategories = fetchCategories;
+exports.fetchCollections = fetchCollections;
 
 var _types = __webpack_require__(/*! ./types */ "./src/actions/types.js");
 
@@ -78263,15 +78303,17 @@ function setDevice(device) {
   };
 }
 
-function setApps(apps) {
+function setApps(apps, device) {
   return {
     type: _types.SET_APPS,
-    payload: apps
+    payload: {
+      apps: apps,
+      device: device
+    }
   };
 }
 
 function setCategories(categories) {
-  // make a dictionary out of array
   var payload = categories.reduce(function (acc, category) {
     return _extends({}, acc, _defineProperty({}, category.id, category));
   }, {});
@@ -78282,14 +78324,23 @@ function setCategories(categories) {
   };
 }
 
-function fetchDataForDevice(device) {
+function setCollections(collections) {
+  return {
+    type: _types.SET_COLLECTIONS,
+    payload: collections
+  };
+}
+
+function fetchAppsForDevice(device) {
   return function (dispatch) {
     (0, _request2.default)('apps', { device: device }).then(function (res) {
-      return dispatch(setApps(res.results));
-    });
+      return dispatch(setApps(res.results, device));
+    }).catch(function () {
+      return dispatch(setApps([], device));
+    }); // pretend to get empty data if the request fails
 
     return {
-      type: _types.FETCH_DATA_FOR_DEVICE,
+      type: _types.FETCH_APPS_FOR_DEVICE,
       payload: device
     };
   };
@@ -78299,10 +78350,26 @@ function fetchCategories() {
   return function (dispatch) {
     (0, _request2.default)('categories').then(function (res) {
       return dispatch(setCategories(res.results));
+    }).catch(function () {
+      return dispatch(setCategories([]));
     });
 
     return {
       type: _types.FETCH_CATEGORIES
+    };
+  };
+}
+
+function fetchCollections() {
+  return function (dispatch) {
+    (0, _request2.default)('collections').then(function (res) {
+      return dispatch(setCollections(res.results));
+    }).catch(function () {
+      return dispatch(setCollections([]));
+    });
+
+    return {
+      type: _types.FETCH_COLLECTIONS
     };
   };
 }
@@ -78328,9 +78395,13 @@ var SET_APPS = exports.SET_APPS = 'SET_APPS';
 
 var SET_CATEGORIES = exports.SET_CATEGORIES = 'SET_CATEGORIES';
 
-var FETCH_DATA_FOR_DEVICE = exports.FETCH_DATA_FOR_DEVICE = 'FETCH_DATA_FOR_DEVICE';
+var SET_COLLECTIONS = exports.SET_COLLECTIONS = 'SET_COLLECTIONS';
+
+var FETCH_APPS_FOR_DEVICE = exports.FETCH_APPS_FOR_DEVICE = 'FETCH_APPS_FOR_DEVICE';
 
 var FETCH_CATEGORIES = exports.FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+
+var FETCH_COLLECTIONS = exports.FETCH_COLLECTIONS = 'FETCH_COLLECTIONS';
 
 /***/ }),
 
@@ -78358,13 +78429,17 @@ var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-type
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Switcher = __webpack_require__(/*! ../Switcher */ "./src/components/Switcher/index.jsx");
+var _AppCollection = __webpack_require__(/*! ../AppCollection */ "./src/components/AppCollection/index.jsx");
 
-var _Switcher2 = _interopRequireDefault(_Switcher);
+var _AppCollection2 = _interopRequireDefault(_AppCollection);
 
 var _Loader = __webpack_require__(/*! ../Loader */ "./src/components/Loader/index.jsx");
 
 var _Loader2 = _interopRequireDefault(_Loader);
+
+var _Switcher = __webpack_require__(/*! ../Switcher */ "./src/components/Switcher/index.jsx");
+
+var _Switcher2 = _interopRequireDefault(_Switcher);
 
 __webpack_require__(/*! ./style */ "./src/components/App/style.scss");
 
@@ -78388,56 +78463,58 @@ var App = function (_React$PureComponent) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.onSwitcherButtonClick(this.props.selectedDevice);
+      this.props.fetchAppsForDevice(this.props.selectedDevice);
     }
   }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
           selectedDevice = _props.selectedDevice,
-          onSwitcherButtonClick = _props.onSwitcherButtonClick,
+          fetchAppsForDevice = _props.fetchAppsForDevice,
           isLoading = _props.isLoading,
+          apps = _props.apps,
           categories = _props.categories,
-          apps = _props.apps;
+          collections = _props.collections;
 
-
-      console.log(this.props);
 
       return _react2.default.createElement(
         'div',
         { className: 'app' },
-        _react2.default.createElement(_Switcher2.default, {
-          selectedDevice: selectedDevice,
-          onButtonClick: onSwitcherButtonClick
-        }),
-        isLoading === true && _react2.default.createElement(_Loader2.default, null),
+        isLoading && _react2.default.createElement(_Loader2.default, null),
         _react2.default.createElement(
           'div',
-          null,
-          'Apps:'
+          { className: 'app__top-content' },
+          _react2.default.createElement(_Switcher2.default, {
+            selectedDevice: selectedDevice,
+            onButtonClick: fetchAppsForDevice
+          }),
+          _react2.default.createElement(
+            'div',
+            null,
+            'BANNERS'
+          )
         ),
-        Array.isArray(apps) && _react2.default.createElement(
+        _react2.default.createElement(
           'div',
-          null,
-          apps.map(function (app) {
-            return _react2.default.createElement(
-              'div',
-              null,
-              app.id + ' ' + app.title + ' ' + (app.devices && app.devices.join(', '))
-            );
+          { className: 'app__main-content' },
+          Array.isArray(collections) && Array.isArray(apps) && collections.map(function (_ref) {
+            var id = _ref.id,
+                title = _ref.title;
+            return _react2.default.createElement(_AppCollection2.default, {
+              key: id,
+              title: title,
+              apps: apps.filter(function (_ref2) {
+                var collectionId = _ref2.collectionId;
+                return collectionId === id;
+              }),
+              categories: categories
+            });
           })
         ),
         _react2.default.createElement(
           'div',
-          null,
-          'Categories:'
-        ),
-        categories !== undefined && _react2.default.createElement(
-          'div',
-          null,
-          Object.values(categories).map(function (c) {
-            return c.id;
-          }).join(', ')
+          { className: 'app__side-content' },
+          'SIDE CONTENT'
         )
       );
     }
@@ -78447,13 +78524,13 @@ var App = function (_React$PureComponent) {
 }(_react2.default.PureComponent);
 
 App.propTypes = {
-  isLoading: _propTypes2.default.bool,
-  selectedDevice: _propTypes2.default.oneOf(['iPhone', 'iPad']),
-  onSwitcherButtonClick: _propTypes2.default.func.isRequired,
+  selectedDevice: _Switcher2.default.propTypes.selectedDevice,
+  apps: _propTypes2.default.array,
   categories: _propTypes2.default.object,
-  apps: _propTypes2.default.array
+  collections: _propTypes2.default.array,
+  fetchAppsForDevice: _propTypes2.default.func.isRequired,
+  isLoading: _propTypes2.default.bool
 };
-
 exports.default = App;
 
 /***/ }),
@@ -78467,6 +78544,304 @@ exports.default = App;
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/App/style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/AppCollection/AppItem/index.jsx":
+/*!********************************************************!*\
+  !*** ./src/components/AppCollection/AppItem/index.jsx ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+__webpack_require__(/*! ./style */ "./src/components/AppCollection/AppItem/style.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BCN = 'app__app-collection__app-item'; // Base Class Name
+
+var AppItem = function AppItem(_ref) {
+  var _ref$app = _ref.app,
+      title = _ref$app.title,
+      icon = _ref$app.icon,
+      link = _ref$app.link,
+      price = _ref$app.price,
+      purchases = _ref$app.purchases,
+      category = _ref.category,
+      showFullInfo = _ref.showFullInfo;
+  return _react2.default.createElement(
+    'div',
+    { className: BCN },
+    _react2.default.createElement(_semanticUiReact.Image, { src: icon }),
+    _react2.default.createElement(
+      'div',
+      { className: BCN + '__title' },
+      title
+    ),
+    typeof category === 'string' && _react2.default.createElement(
+      'div',
+      { className: BCN + '__category' },
+      category
+    ),
+    showFullInfo !== true && price > 0 && _react2.default.createElement(
+      'div',
+      { className: BCN + '__price' },
+      price + ' \u0440\u0443\u0431.'
+    ),
+    showFullInfo && _react2.default.createElement(
+      _react2.default.Fragment,
+      null,
+      _react2.default.createElement(
+        'a',
+        {
+          className: BCN + '__link',
+          href: link,
+          title: '\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E',
+          target: '_blank',
+          rel: 'noopener noreferrer'
+        },
+        price > 0 ? price + ' \u0440\u0443\u0431.' : 'Загрузить'
+      ),
+      purchases && _react2.default.createElement(
+        'div',
+        { className: BCN + '__purchases' },
+        '\u0412\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043F\u043E\u043A\u0443\u043F\u043A\u0438'
+      )
+    )
+  );
+};
+
+AppItem.propTypes = {
+  app: _propTypes2.default.object.isRequired,
+  category: _propTypes2.default.string,
+  showFullInfo: _propTypes2.default.bool
+};
+
+exports.default = AppItem;
+
+/***/ }),
+
+/***/ "./src/components/AppCollection/AppItem/style.scss":
+/*!*********************************************************!*\
+  !*** ./src/components/AppCollection/AppItem/style.scss ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/sass-loader/lib/loader.js!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/AppCollection/AppItem/style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/AppCollection/index.jsx":
+/*!************************************************!*\
+  !*** ./src/components/AppCollection/index.jsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+var _AppItem = __webpack_require__(/*! ./AppItem */ "./src/components/AppCollection/AppItem/index.jsx");
+
+var _AppItem2 = _interopRequireDefault(_AppItem);
+
+__webpack_require__(/*! ./style */ "./src/components/AppCollection/style.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BCN = 'app__app-collection'; // Base Class Name
+
+var AppCollection = function (_React$PureComponent) {
+  _inherits(AppCollection, _React$PureComponent);
+
+  function AppCollection() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, AppCollection);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AppCollection.__proto__ || Object.getPrototypeOf(AppCollection)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      isModalOpen: false
+    }, _this.openModal = function () {
+      return _this.setState({ isModalOpen: true });
+    }, _this.closeModal = function () {
+      return _this.setState({ isModalOpen: false });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(AppCollection, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          apps = _props.apps,
+          limit = _props.limit,
+          title = _props.title,
+          categories = _props.categories,
+          isModalOpen = this.state.isModalOpen;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: BCN },
+        _react2.default.createElement(
+          'div',
+          { className: BCN + '__header' },
+          _react2.default.createElement(
+            'span',
+            null,
+            title
+          ),
+          _react2.default.createElement(
+            'span',
+            {
+              className: BCN + '__header__view-all',
+              onClick: this.openModal
+            },
+            '\u0421\u043C. \u0432\u0441\u0435'
+          )
+        ),
+        _react2.default.createElement(
+          _semanticUiReact.List,
+          { horizontal: true },
+          apps.slice(0, limit).map(function (app) {
+            return _react2.default.createElement(
+              _semanticUiReact.List.Item,
+              { key: app.id },
+              _react2.default.createElement(_AppItem2.default, {
+                app: app,
+                category: categories !== undefined && categories[app.categoryId] !== undefined ? categories[app.categoryId].title : undefined
+              })
+            );
+          })
+        ),
+        _react2.default.createElement(
+          _semanticUiReact.Modal,
+          {
+            open: isModalOpen,
+            onClose: this.closeModal
+          },
+
+          // evaluating modal content only if modal is open
+          isModalOpen && apps.map(function (app) {
+            return _react2.default.createElement(_AppItem2.default, {
+              key: app.id,
+              app: app,
+              category: categories !== undefined && categories[app.categoryId] !== undefined ? categories[app.categoryId].title : undefined,
+              showFullInfo: true
+            });
+          })
+        )
+      );
+    }
+  }]);
+
+  return AppCollection;
+}(_react2.default.PureComponent);
+
+AppCollection.propTypes = {
+  apps: _propTypes2.default.array.isRequired,
+  limit: _propTypes2.default.number,
+  title: _propTypes2.default.string,
+  categories: _propTypes2.default.object
+};
+AppCollection.defaultProps = {
+  limit: 10
+};
+exports.default = AppCollection;
+
+/***/ }),
+
+/***/ "./src/components/AppCollection/style.scss":
+/*!*************************************************!*\
+  !*** ./src/components/AppCollection/style.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/AppCollection/style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -78532,12 +78907,12 @@ var Loader = function Loader(_ref) {
   );
 };
 
-Loader.defaultProps = {
-  message: 'Loading...'
-};
-
 Loader.propTypes = {
   message: _propTypes2.default.string
+};
+
+Loader.defaultProps = {
+  message: 'Loading...'
 };
 
 exports.default = Loader;
@@ -78671,7 +79046,6 @@ Switcher.propTypes = {
   selectedDevice: _propTypes2.default.oneOf(['iPhone', 'iPad']).isRequired,
   onButtonClick: _propTypes2.default.func.isRequired
 };
-
 exports.default = Switcher;
 
 /***/ }),
@@ -78720,11 +79094,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /*
-  interface AppItem {
+  interface Data {
+    apps: AppEntry[];
+    categories: Category[];
+    collections: Collection[];
+    devices: Device[];
+  }
+
+  interface AppEntry {
     id: number; // Primary Key - integer
     title: string;
     icon: string; // icon URL
     categoryId: number: // Foreign Key - integer
+    collectionId: number; // Foreign Key
     link: string; // href
     price: number; // 0 if free
     purchases: boolean; // in-app purchases
@@ -78732,6 +79114,11 @@ Object.defineProperty(exports, "__esModule", {
   }
 
   interface Category {
+    id: number;
+    title: string;
+  }
+
+  interface Collection {
     id: number;
     title: string;
   }
@@ -78752,16 +79139,30 @@ exports.default = {
   }],
   categories: [{
     id: 1,
-    title: '1'
+    title: 'Игры'
   }, {
     id: 2,
-    title: '2'
+    title: 'Приложения'
+  }],
+  collections: [{
+    id: 1,
+    title: 'Новое и интересное'
+  }, {
+    id: 2,
+    title: 'Любителям классики'
+  }, {
+    id: 3,
+    title: 'Вам может понравиться'
+  }, {
+    id: 4,
+    title: 'Фавориты прошлых недель'
   }],
   apps: [{
     id: 1,
     title: 'App 1',
     icon: '',
     categoryId: 1,
+    collectionId: 1,
     link: '',
     price: 0,
     purchases: false
@@ -78769,7 +79170,8 @@ exports.default = {
     id: 2,
     title: 'App 2',
     icon: '',
-    categoryId: 2,
+    categoryId: 1,
+    collectionId: 1,
     link: '',
     price: 0,
     purchases: false,
@@ -78779,6 +79181,7 @@ exports.default = {
     title: 'App 3',
     icon: '',
     categoryId: 2,
+    collectionId: 2,
     link: '',
     price: 2.50,
     purchases: true,
@@ -78787,11 +79190,52 @@ exports.default = {
     id: 4,
     title: 'App 4',
     icon: '',
+    categoryId: 2,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: false,
+    devices: [1]
+  }, {
+    id: 5,
+    title: 'App 5',
+    icon: '',
     categoryId: 1,
+    collectionId: 3,
     link: '',
     price: 0,
     purchases: false,
     devices: [1, 2]
+  }, {
+    id: 6,
+    title: 'App 6',
+    icon: '',
+    categoryId: 1,
+    collectionId: 3,
+    link: '',
+    price: 0,
+    purchases: false,
+    devices: [2]
+  }, {
+    id: 7,
+    title: 'App 7',
+    icon: '',
+    categoryId: 2,
+    collectionId: 4,
+    link: '',
+    price: 0,
+    purchases: false,
+    devices: [1, 2]
+  }, {
+    id: 8,
+    title: 'App 8',
+    icon: '',
+    categoryId: 2,
+    collectionId: 4,
+    link: '',
+    price: 0,
+    purchases: false,
+    devices: [2]
   }]
 };
 
@@ -78840,16 +79284,23 @@ function getApps(data) {
   return results;
 }
 
-function getCategories(data) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
+function getCategories(data /* , params={} */) {
   return data.categories;
 }
 
-// mimics an HTTP request behavior
+function getCollections(data /* , params={} */) {
+  return data.collections;
+}
+
+/**
+ * Mimics an HTTP request behavior
+ * @param {string} baseUrl 'apps' | 'categories' | 'collections'
+ * @param {object} params request parameters
+ * @return Promise<{ results: object[] }>
+*/
 function requestData(baseUrl, params) {
   return new Promise(function (resolve, reject) {
-    var delay = 2000 * Math.random(); // handle request after 0-2 seconds
+    var delay = 1000 * Math.random(); // handle requests after up to 1 second
 
     var results = void 0;
 
@@ -78860,6 +79311,10 @@ function requestData(baseUrl, params) {
 
       case 'categories':
         results = getCategories(_2.default, params);
+        break;
+
+      case 'collections':
+        results = getCollections(_2.default, params);
         break;
 
       default:
@@ -78916,27 +79371,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function mapStateToProps(state) {
   return {
     selectedDevice: state.selectedDevice,
-    isLoading: state.fetchingForDevice !== undefined,
+    isLoading: state.isLoading,
+    apps: state.apps,
     categories: state.categories,
-    apps: state.apps
+    collections: state.collections
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSwitcherButtonClick: function onSwitcherButtonClick(platform) {
-      return dispatch((0, _actions.fetchDataForDevice)(platform)(dispatch));
+    fetchAppsForDevice: function fetchAppsForDevice(device) {
+      return dispatch((0, _actions.fetchAppsForDevice)(device)(dispatch));
     }
   };
 }
 
 var ConnectedApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App2.default);
 
-_reactDom2.default.render(_react2.default.createElement(
-  _reactRedux.Provider,
-  { store: _store2.default },
-  _react2.default.createElement(ConnectedApp, null)
-), document.getElementById('app-root'));
+var unsubscribe = _store2.default.subscribe(function () {
+  var _store$getState = _store2.default.getState(),
+      categories = _store$getState.categories,
+      collections = _store$getState.collections;
+
+  if (categories !== undefined && collections !== undefined) {
+    unsubscribe();
+
+    _reactDom2.default.render(_react2.default.createElement(
+      _reactRedux.Provider,
+      { store: _store2.default },
+      _react2.default.createElement(ConnectedApp, null)
+    ), document.getElementById('app-root'));
+  }
+});
+
+_store2.default.dispatch((0, _actions.fetchCategories)()(_store2.default.dispatch));
+_store2.default.dispatch((0, _actions.fetchCollections)()(_store2.default.dispatch));
 
 /***/ }),
 
@@ -78958,20 +79427,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _types = __webpack_require__(/*! ../actions/types */ "./src/actions/types.js");
 
+/*
+  interface StoreState {
+    selectedDevice: 'iPhone' | 'iPad';
+    isLoading: boolean;
+    apps?: AppEntry[];
+    categories?: Category[];
+    collections?: Collection[];
+  }
+*/
+
 var initialState = {
-  selectedDevice: 'iPhone', // 'iPhone' | 'iPad'
-  fetchingForDevice: undefined
+  selectedDevice: 'iPhone',
+  isLoading: false
 };
 
 function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  console.log(action);
   switch (action.type) {
-    case _types.FETCH_DATA_FOR_DEVICE:
+    case _types.FETCH_APPS_FOR_DEVICE:
       return _extends({}, state, {
-        fetchingForDevice: action.payload
+        isLoading: true
       });
 
     case _types.SET_DEVICE:
@@ -78981,14 +79459,19 @@ function rootReducer() {
 
     case _types.SET_APPS:
       return _extends({}, state, {
-        selectedDevice: state.fetchingForDevice,
-        fetchingForDevice: undefined,
-        apps: action.payload
+        apps: action.payload.apps,
+        selectedDevice: action.payload.device,
+        isLoading: false
       });
 
     case _types.SET_CATEGORIES:
       return _extends({}, state, {
         categories: action.payload
+      });
+
+    case _types.SET_COLLECTIONS:
+      return _extends({}, state, {
+        collections: action.payload
       });
 
     default:
@@ -79020,13 +79503,9 @@ var _root = __webpack_require__(/*! ../reducers/root */ "./src/reducers/root.js"
 
 var _root2 = _interopRequireDefault(_root);
 
-var _actions = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var store = (0, _redux.createStore)(_root2.default);
-
-store.dispatch((0, _actions.fetchCategories)()(store.dispatch));
 
 exports.default = store;
 

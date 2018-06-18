@@ -2,21 +2,31 @@ import {
   SET_DEVICE,
   SET_APPS,
   SET_CATEGORIES,
-  FETCH_DATA_FOR_DEVICE,
+  SET_COLLECTIONS,
+  FETCH_APPS_FOR_DEVICE,
 } from '../actions/types';
 
+/*
+  interface StoreState {
+    selectedDevice: 'iPhone' | 'iPad';
+    isLoading: boolean;
+    apps?: AppEntry[];
+    categories?: Category[];
+    collections?: Collection[];
+  }
+*/
+
 const initialState = {
-  selectedDevice: 'iPhone', // 'iPhone' | 'iPad'
-  fetchingForDevice: undefined,
+  selectedDevice: 'iPhone',
+  isLoading: false,
 };
 
 function rootReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
-    case FETCH_DATA_FOR_DEVICE:
+    case FETCH_APPS_FOR_DEVICE:
       return {
         ...state,
-        fetchingForDevice: action.payload,
+        isLoading: true,
       };
 
     case SET_DEVICE:
@@ -28,15 +38,21 @@ function rootReducer(state = initialState, action) {
     case SET_APPS:
       return {
         ...state,
-        selectedDevice: state.fetchingForDevice,
-        fetchingForDevice: undefined,
-        apps: action.payload,
+        apps: action.payload.apps,
+        selectedDevice: action.payload.device,
+        isLoading: false,
       };
 
     case SET_CATEGORIES:
       return {
         ...state,
         categories: action.payload,
+      };
+
+    case SET_COLLECTIONS:
+      return {
+        ...state,
+        collections: action.payload,
       };
 
     default:

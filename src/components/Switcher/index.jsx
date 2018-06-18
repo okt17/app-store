@@ -4,6 +4,10 @@ import { Button } from 'semantic-ui-react';
 import './style';
 
 class Switcher extends React.PureComponent {
+  static propTypes = {
+    selectedDevice: PropTypes.oneOf(['iPhone', 'iPad']).isRequired,
+    onButtonClick: PropTypes.func.isRequired,
+  };
   handleButtonClick = (event) => {
     const device = event.target.name;
     if (device !== this.props.selectedDevice) {
@@ -11,9 +15,7 @@ class Switcher extends React.PureComponent {
     }
   };
   render() {
-    const {
-      selectedDevice,
-    } = this.props;
+    const { selectedDevice } = this.props;
 
     return (
       <Button.Group className='app__switcher'>
@@ -38,10 +40,5 @@ class Switcher extends React.PureComponent {
     );
   }
 }
-
-Switcher.propTypes = {
-  selectedDevice: PropTypes.oneOf(['iPhone', 'iPad']).isRequired,
-  onButtonClick: PropTypes.func.isRequired,
-};
 
 export default Switcher;

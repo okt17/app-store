@@ -6,7 +6,7 @@ var
 
 module.exports = {
   entry: [
-    "babel-polyfill",
+    'babel-polyfill',
     APP_DIR + '/index.jsx'
   ],
   output: {

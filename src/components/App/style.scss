@@ -1,3 +1,23 @@
 .app {
   height: 100%;
+
+  &__top-content {
+    height: 20%;
+    padding: 0.5rem;
+  }
+
+  &__main-content, &__side-content {
+    float: left;
+    height: 80%;
+    padding: 0.5rem;
+  }
+
+  &__main-content {
+    width: 75%;
+    padding-top: 1rem;
+  }
+
+  &__side-content {
+    width: 25%;
+  }
 }

@@ -1,63 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Switcher from '../Switcher';
+import AppCollection from '../AppCollection';
 import Loader from '../Loader';
+import Switcher from '../Switcher';
 import './style';
 
 class App extends React.PureComponent {
+  static propTypes = {
+    selectedDevice: Switcher.propTypes.selectedDevice,
+    apps: PropTypes.array,
+    categories: PropTypes.object,
+    collections: PropTypes.array,
+    fetchAppsForDevice: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool,
+  };
   componentDidMount() {
-    this.props.onSwitcherButtonClick(this.props.selectedDevice);
+    this.props.fetchAppsForDevice(this.props.selectedDevice);
   }
   render() {
     const {
       selectedDevice,
-      onSwitcherButtonClick,
+      fetchAppsForDevice,
       isLoading,
-      categories,
       apps,
+      categories,
+      collections,
     } = this.props;
-
-    console.log(this.props);
 
     return (
       <div className='app'>
-        <Switcher
-          selectedDevice={selectedDevice}
-          onButtonClick={onSwitcherButtonClick}
-        />
         {
-          isLoading === true
+          isLoading
           &&
           <Loader />
         }
-        <div>Apps:</div>
-        {
-          Array.isArray(apps)
-          &&
-          <div>
-            {
-              apps.map(app => (
-                <div>
-                  {`${app.id} ${app.title} ${app.devices && app.devices.join(', ')}`}
-                </div>
-              ))
-            }
-          </div>
-        }
+        <div className='app__top-content'>
+          <Switcher
+            selectedDevice={selectedDevice}
+            onButtonClick={fetchAppsForDevice}
+          />
 
-        <div>Categories:</div>
-        {categories !== undefined && <div>{Object.values(categories).map(c => c.id).join(', ')}</div>}
+          <div>BANNERS</div>
+        </div>
+
+        <div className='app__main-content'>
+          {
+            Array.isArray(collections)
+            &&
+            Array.isArray(apps)
+            &&
+            collections.map(({ id, title }) => (
+              <AppCollection
+                key={id}
+                title={title}
+                apps={apps.filter(({ collectionId }) => collectionId === id)}
+                categories={categories}
+              />
+            ))
+          }
+        </div>
+
+        <div className='app__side-content'>
+          SIDE CONTENT
+        </div>
       </div>
     );
   }
 }
-
-App.propTypes = {
-  isLoading: PropTypes.bool,
-  selectedDevice: PropTypes.oneOf(['iPhone', 'iPad']),
-  onSwitcherButtonClick: PropTypes.func.isRequired,
-  categories: PropTypes.object,
-  apps: PropTypes.array,
-};
 
 export default App;

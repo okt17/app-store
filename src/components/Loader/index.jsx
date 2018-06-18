@@ -16,12 +16,12 @@ const Loader = ({ message }) => (
   </div>
 );
 
-Loader.defaultProps = {
-  message: 'Loading...',
-};
-
 Loader.propTypes = {
   message: PropTypes.string,
+};
+
+Loader.defaultProps = {
+  message: 'Loading...',
 };
 
 export default Loader;
