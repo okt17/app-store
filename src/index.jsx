@@ -17,6 +17,7 @@ function mapStateToProps(state) {
     apps: state.apps,
     categories: state.categories,
     collections: state.collections,
+    banners: state.banners,
   };
 }
 

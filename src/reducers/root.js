@@ -5,6 +5,7 @@ import {
   SET_COLLECTIONS,
   FETCH_APPS_FOR_DEVICE,
 } from '../actions/types';
+import DATA from '../data';
 
 /*
   interface StoreState {
@@ -13,12 +14,17 @@ import {
     apps?: AppEntry[];
     categories?: Category[];
     collections?: Collection[];
+    banners: {
+      small: string[];
+      big: string[];
+    };
   }
 */
 
 const initialState = {
   selectedDevice: 'iPhone',
   isLoading: false,
+  banners: DATA.banners,
 };
 
 function rootReducer(state = initialState, action) {

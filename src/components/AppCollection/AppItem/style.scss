@@ -1,12 +1,29 @@
 .app__app-collection__app-item {
-  display: inline-block;
+  vertical-align: top;
+  max-width: 96px;
+
+  margin-left: 0 !important;
+  margin-right: 0.8rem !important;
+  margin-bottom: 0.8rem !important;
+
+  &__icon {
+    height: 96px !important;
+    width: 96px !important;
+    cursor: pointer;
+
+    &_layout-horizontal {
+      float: left;
+      height: 48px !important;
+      width: 48px !important;
+    }
+  }
 
   &__title {
-
+    cursor: pointer;
   }
 
   &__category {
-
+    color: grey;
   }
 
   &__price {
@@ -18,6 +35,6 @@
   }
 
   &__purchases {
-    
+
   }
 }

@@ -13739,7 +13739,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".app {\n  height: 100%; }\n  .app__top-content {\n    height: 20%;\n    padding: 0.5rem; }\n  .app__main-content, .app__side-content {\n    float: left;\n    height: 80%;\n    padding: 0.5rem; }\n  .app__main-content {\n    width: 75%;\n    padding-top: 1rem; }\n  .app__side-content {\n    width: 25%; }\n", ""]);
+exports.push([module.i, ".app {\n  height: 100vh;\n  overflow: hidden; }\n  .app__top-content {\n    height: 20vh;\n    padding: 0.5rem; }\n  .app__main-content, .app__side-content {\n    float: left;\n    height: 80vh;\n    padding: 1rem;\n    overflow: auto; }\n  .app__main-content {\n    width: 75vw; }\n  .app__side-content {\n    width: 25vw; }\n", ""]);
 
 // exports
 
@@ -13758,7 +13758,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".app__app-collection__app-item {\n  display: inline-block; }\n", ""]);
+exports.push([module.i, ".app__app-collection__app-item {\n  vertical-align: top;\n  max-width: 96px;\n  margin-left: 0 !important;\n  margin-right: 0.8rem !important;\n  margin-bottom: 0.8rem !important; }\n  .app__app-collection__app-item__icon {\n    height: 96px !important;\n    width: 96px !important;\n    cursor: pointer; }\n    .app__app-collection__app-item__icon_layout-horizontal {\n      float: left;\n      height: 48px !important;\n      width: 48px !important; }\n  .app__app-collection__app-item__title {\n    cursor: pointer; }\n  .app__app-collection__app-item__category {\n    color: grey; }\n", ""]);
 
 // exports
 
@@ -13777,7 +13777,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".app__app-collection {\n  width: 100%; }\n  .app__app-collection__header {\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none; }\n    .app__app-collection__header__view-all {\n      float: right;\n      cursor: pointer; }\n", ""]);
+exports.push([module.i, ".app__app-collection {\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden; }\n  .app__app-collection__header {\n    border-bottom: 1px solid rgba(200, 200, 200, 0.4);\n    margin-bottom: 0.3rem;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none; }\n    .app__app-collection__header__title {\n      font-size: 1.2rem; }\n    .app__app-collection__header__action-button {\n      color: #c8c8c8;\n      float: right; }\n      .app__app-collection__header__action-button:hover {\n        cursor: pointer;\n        color: grey; }\n  .app__app-collection__modal {\n    width: auto !important;\n    min-width: 40vw;\n    max-width: 80vw; }\n    .app__app-collection__modal__content {\n      margin: 1rem;\n      max-height: 90%;\n      overflow: auto; }\n", ""]);
 
 // exports
 
@@ -13797,6 +13797,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".app__loader-container {\n  position: absolute;\n  text-align: center;\n  top: 0.5rem;\n  left: 50%; }\n  .app__loader-container__loader {\n    display: inline-block !important;\n    margin-right: 0.5rem !important; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/Scroller/style.scss":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/Scroller/style.scss ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".app__banners-view {\n  position: relative;\n  white-space: nowrap;\n  overflow: hidden;\n  height: 12vh;\n  width: 100%; }\n  .app__banners-view__left-button, .app__banners-view__right-button {\n    position: fixed;\n    background-color: rgba(0, 0, 0, 0) !important;\n    z-index: 100;\n    height: 12vh;\n    margin: 0; }\n    .app__banners-view__left-button:hover, .app__banners-view__right-button:hover {\n      background-color: rgba(100, 100, 100, 0.3) !important; }\n  .app__banners-view__left-button {\n    left: 0; }\n  .app__banners-view__right-button {\n    right: 0; }\n  .app__banners-view__image {\n    display: inline-block !important;\n    max-width: 100%;\n    max-height: 100%; }\n    .app__banners-view__image:not(:last-child) {\n      margin-right: 0.2em; }\n", ""]);
 
 // exports
 
@@ -78433,6 +78452,10 @@ var _AppCollection = __webpack_require__(/*! ../AppCollection */ "./src/componen
 
 var _AppCollection2 = _interopRequireDefault(_AppCollection);
 
+var _Scroller = __webpack_require__(/*! ../Scroller */ "./src/components/Scroller/index.jsx");
+
+var _Scroller2 = _interopRequireDefault(_Scroller);
+
 var _Loader = __webpack_require__(/*! ../Loader */ "./src/components/Loader/index.jsx");
 
 var _Loader2 = _interopRequireDefault(_Loader);
@@ -78474,7 +78497,8 @@ var App = function (_React$PureComponent) {
           isLoading = _props.isLoading,
           apps = _props.apps,
           categories = _props.categories,
-          collections = _props.collections;
+          collections = _props.collections,
+          banners = _props.banners;
 
 
       return _react2.default.createElement(
@@ -78488,11 +78512,7 @@ var App = function (_React$PureComponent) {
             selectedDevice: selectedDevice,
             onButtonClick: fetchAppsForDevice
           }),
-          _react2.default.createElement(
-            'div',
-            null,
-            'BANNERS'
-          )
+          banners !== undefined && Array.isArray(banners.big) && _react2.default.createElement(_Scroller2.default, { images: banners.big })
         ),
         _react2.default.createElement(
           'div',
@@ -78514,7 +78534,28 @@ var App = function (_React$PureComponent) {
         _react2.default.createElement(
           'div',
           { className: 'app__side-content' },
-          'SIDE CONTENT'
+          Array.isArray(apps) && _react2.default.createElement(
+            _react2.default.Fragment,
+            null,
+            _react2.default.createElement(_AppCollection2.default, {
+              layout: 'vertical',
+              title: '\u0422\u043E\u043F \u043F\u043B\u0430\u0442\u043D\u044B\u0445 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439',
+              apps: apps.filter(function (_ref3) {
+                var price = _ref3.price;
+                return price > 0;
+              }),
+              categories: categories
+            }),
+            _react2.default.createElement(_AppCollection2.default, {
+              layout: 'vertical',
+              title: '\u0422\u043E\u043F \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u044B\u0445 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439',
+              apps: apps.filter(function (_ref4) {
+                var price = _ref4.price;
+                return price === 0;
+              }),
+              categories: categories
+            })
+          )
         )
       );
     }
@@ -78529,7 +78570,8 @@ App.propTypes = {
   categories: _propTypes2.default.object,
   collections: _propTypes2.default.array,
   fetchAppsForDevice: _propTypes2.default.func.isRequired,
-  isLoading: _propTypes2.default.bool
+  isLoading: _propTypes2.default.bool,
+  banners: _propTypes2.default.object
 };
 exports.default = App;
 
@@ -78603,44 +78645,70 @@ var AppItem = function AppItem(_ref) {
       price = _ref$app.price,
       purchases = _ref$app.purchases,
       category = _ref.category,
-      showFullInfo = _ref.showFullInfo;
+      showFullInfo = _ref.showFullInfo,
+      showIcon = _ref.showIcon,
+      layout = _ref.layout;
   return _react2.default.createElement(
-    'div',
+    _semanticUiReact.List.Item,
     { className: BCN },
-    _react2.default.createElement(_semanticUiReact.Image, { src: icon }),
-    _react2.default.createElement(
-      'div',
-      { className: BCN + '__title' },
-      title
-    ),
-    typeof category === 'string' && _react2.default.createElement(
-      'div',
-      { className: BCN + '__category' },
-      category
-    ),
-    showFullInfo !== true && price > 0 && _react2.default.createElement(
-      'div',
-      { className: BCN + '__price' },
-      price + ' \u0440\u0443\u0431.'
-    ),
-    showFullInfo && _react2.default.createElement(
-      _react2.default.Fragment,
-      null,
+    showIcon && _react2.default.createElement(
+      _semanticUiReact.List.Icon,
+      { className: BCN + '__icon ' + BCN + '__icon_layout-' + layout },
       _react2.default.createElement(
         'a',
         {
-          className: BCN + '__link',
           href: link,
-          title: '\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E',
           target: '_blank',
           rel: 'noopener noreferrer'
         },
-        price > 0 ? price + ' \u0440\u0443\u0431.' : 'Загрузить'
-      ),
-      purchases && _react2.default.createElement(
+        _react2.default.createElement(_semanticUiReact.Image, { fluid: true, src: icon })
+      )
+    ),
+    _react2.default.createElement(
+      'a',
+      {
+        href: link,
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      },
+      _react2.default.createElement(
+        _semanticUiReact.List.Header,
+        { className: BCN + '__title' },
+        title
+      )
+    ),
+    _react2.default.createElement(
+      _semanticUiReact.List.Content,
+      null,
+      typeof category === 'string' && _react2.default.createElement(
         'div',
-        { className: BCN + '__purchases' },
-        '\u0412\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043F\u043E\u043A\u0443\u043F\u043A\u0438'
+        { className: BCN + '__category' },
+        category
+      ),
+      showFullInfo !== true && price > 0 && _react2.default.createElement(
+        'div',
+        { className: BCN + '__price' },
+        price + ' \u0440\u0443\u0431.'
+      ),
+      showFullInfo && _react2.default.createElement(
+        _react2.default.Fragment,
+        null,
+        _react2.default.createElement(
+          'a',
+          {
+            className: BCN + '__link',
+            href: link,
+            title: '\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E',
+            target: '_blank',
+            rel: 'noopener noreferrer'
+          },
+          price > 0 ? price + ' \u0440\u0443\u0431.' : 'Загрузить'
+        ),
+        purchases && _react2.default.createElement(
+          'div',
+          { className: BCN + '__purchases' },
+          '\u0412\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043F\u043E\u043A\u0443\u043F\u043A\u0438'
+        )
       )
     )
   );
@@ -78649,7 +78717,14 @@ var AppItem = function AppItem(_ref) {
 AppItem.propTypes = {
   app: _propTypes2.default.object.isRequired,
   category: _propTypes2.default.string,
-  showFullInfo: _propTypes2.default.bool
+  showFullInfo: _propTypes2.default.bool,
+  showIcon: _propTypes2.default.bool,
+  layout: _propTypes2.default.oneOf(['vertical', 'horizontal'])
+};
+
+AppItem.defaultProps = {
+  showIcon: true,
+  layout: 'vertical'
 };
 
 exports.default = AppItem;
@@ -78759,8 +78834,13 @@ var AppCollection = function (_React$PureComponent) {
           limit = _props.limit,
           title = _props.title,
           categories = _props.categories,
+          layout = _props.layout,
           isModalOpen = this.state.isModalOpen;
 
+
+      if (apps.length === 0) {
+        return null;
+      }
 
       return _react2.default.createElement(
         'div',
@@ -78770,13 +78850,13 @@ var AppCollection = function (_React$PureComponent) {
           { className: BCN + '__header' },
           _react2.default.createElement(
             'span',
-            null,
+            { className: BCN + '__header__title' },
             title
           ),
           _react2.default.createElement(
             'span',
             {
-              className: BCN + '__header__view-all',
+              className: BCN + '__header__action-button',
               onClick: this.openModal
             },
             '\u0421\u043C. \u0432\u0441\u0435'
@@ -78784,34 +78864,62 @@ var AppCollection = function (_React$PureComponent) {
         ),
         _react2.default.createElement(
           _semanticUiReact.List,
-          { horizontal: true },
-          apps.slice(0, limit).map(function (app) {
-            return _react2.default.createElement(
-              _semanticUiReact.List.Item,
-              { key: app.id },
-              _react2.default.createElement(_AppItem2.default, {
-                app: app,
-                category: categories !== undefined && categories[app.categoryId] !== undefined ? categories[app.categoryId].title : undefined
-              })
-            );
+          {
+            horizontal: layout === 'horizontal',
+            nowrap: 'true'
+          },
+          apps.slice(0, limit).map(function (app, i) {
+            return _react2.default.createElement(_AppItem2.default, {
+              key: app.id,
+              app: app,
+              category: categories !== undefined && categories[app.categoryId] !== undefined ? categories[app.categoryId].title : undefined,
+              showIcon: layout === 'horizontal' || i === 0,
+              layout: layout === 'horizontal' ? 'vertical' : 'horizontal'
+            });
           })
         ),
         _react2.default.createElement(
           _semanticUiReact.Modal,
           {
             open: isModalOpen,
-            onClose: this.closeModal
+            onClose: this.closeModal,
+            className: BCN + '__modal'
           },
 
           // evaluating modal content only if modal is open
-          isModalOpen && apps.map(function (app) {
-            return _react2.default.createElement(_AppItem2.default, {
-              key: app.id,
-              app: app,
-              category: categories !== undefined && categories[app.categoryId] !== undefined ? categories[app.categoryId].title : undefined,
-              showFullInfo: true
-            });
-          })
+          isModalOpen && _react2.default.createElement(
+            'div',
+            { className: BCN + '__modal__content' },
+            _react2.default.createElement(
+              'div',
+              { className: BCN + '__header' },
+              _react2.default.createElement(
+                'span',
+                { className: BCN + '__header__title' },
+                title
+              ),
+              _react2.default.createElement(
+                'span',
+                {
+                  className: BCN + '__header__action-button',
+                  onClick: this.closeModal
+                },
+                '\u041F\u043E\u0434\u0431\u043E\u0440\u043A\u0430'
+              )
+            ),
+            _react2.default.createElement(
+              _semanticUiReact.List,
+              { horizontal: true, className: BCN + '__list' },
+              apps.map(function (app) {
+                return _react2.default.createElement(_AppItem2.default, {
+                  key: app.id,
+                  app: app,
+                  category: categories !== undefined && categories[app.categoryId] !== undefined ? categories[app.categoryId].title : undefined,
+                  showFullInfo: true
+                });
+              })
+            )
+          )
         )
       );
     }
@@ -78822,12 +78930,14 @@ var AppCollection = function (_React$PureComponent) {
 
 AppCollection.propTypes = {
   apps: _propTypes2.default.array.isRequired,
-  limit: _propTypes2.default.number,
+  limit: _propTypes2.default.number, // max number of apps shown (modal shows all of them)
   title: _propTypes2.default.string,
-  categories: _propTypes2.default.object
+  categories: _propTypes2.default.object,
+  layout: _propTypes2.default.oneOf(['vertical', 'horizontal'])
 };
 AppCollection.defaultProps = {
-  limit: 10
+  limit: 15,
+  layout: 'horizontal'
 };
 exports.default = AppCollection;
 
@@ -78928,6 +79038,188 @@ exports.default = Loader;
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/Loader/style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/Scroller/index.jsx":
+/*!*******************************************!*\
+  !*** ./src/components/Scroller/index.jsx ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
+
+__webpack_require__(/*! ./style */ "./src/components/Scroller/style.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BCN = 'app__banners-view'; // Base Class Name
+
+var Scroller = function (_React$PureComponent) {
+  _inherits(Scroller, _React$PureComponent);
+
+  function Scroller() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Scroller);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Scroller.__proto__ || Object.getPrototypeOf(Scroller)).call.apply(_ref, [this].concat(args))), _this), _this.getImgs = function () {
+      return _this.ref.current !== null ? Array.from(_this.ref.current.getElementsByTagName('img')) : [];
+    }, _this.ref = _react2.default.createRef(), _this.scrollLeft = function () {
+      if (_this.currentImgIndex > 0) {
+        var imgs = _this.getImgs();
+        var img = imgs[_this.currentImgIndex - 1];
+        if (img !== undefined) {
+          _this.currentImgIndex -= 1;
+          img.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, _this.scrollRight = function () {
+      var imgs = _this.getImgs();
+      if (_this.currentImgIndex < imgs.length) {
+        var img = imgs[_this.currentImgIndex + 1];
+        if (img !== undefined) {
+          _this.currentImgIndex += 1;
+          img.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+      } else {
+        _this.currentImgIndex = imgs.length;
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Scroller, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.intervalId = setInterval(function () {
+        if (_this2.currentImgIndex > 0 && Math.random() > 0.5) {
+          _this2.scrollLeft();
+        } else {
+          _this2.scrollRight();
+        }
+      }, this.props.scrollInterval);
+
+      var imgs = this.getImgs();
+      if (imgs.length > 0) {
+        // scroll somewhere to the middle initially
+        this.currentImgIndex = Math.floor(imgs.length / 2);
+        imgs[this.currentImgIndex].scrollIntoView({ block: 'end' });
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.intervalId);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var images = this.props.images;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: BCN, ref: this.ref },
+        _react2.default.createElement(
+          _semanticUiReact.Button,
+          {
+            className: BCN + '__left-button',
+            onClick: this.scrollLeft
+          },
+          _react2.default.createElement(_semanticUiReact.Icon, { name: 'angle left' })
+        ),
+        images.map(function (url, i) {
+          return _react2.default.createElement(_semanticUiReact.Image, {
+            className: BCN + '__image',
+            key: String(i),
+            src: url
+          });
+        }),
+        _react2.default.createElement(
+          _semanticUiReact.Button,
+          {
+            className: BCN + '__right-button',
+            onClick: this.scrollRight
+          },
+          _react2.default.createElement(_semanticUiReact.Icon, { name: 'angle right' })
+        )
+      );
+    }
+  }]);
+
+  return Scroller;
+}(_react2.default.PureComponent);
+
+Scroller.propTypes = {
+  images: _propTypes2.default.array.isRequired, // array of image URL's
+  scrollInterval: _propTypes2.default.number // scroll left or right every {scrollInterval} ms
+};
+Scroller.defaultProps = {
+  scrollInterval: 3000
+};
+exports.default = Scroller;
+
+/***/ }),
+
+/***/ "./src/components/Scroller/style.scss":
+/*!********************************************!*\
+  !*** ./src/components/Scroller/style.scss ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/Scroller/style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -79099,6 +79391,10 @@ Object.defineProperty(exports, "__esModule", {
     categories: Category[];
     collections: Collection[];
     devices: Device[];
+    banners: {
+      big: string[];
+      small: string[];
+    };
   }
 
   interface AppEntry {
@@ -79159,17 +79455,18 @@ exports.default = {
   }],
   apps: [{
     id: 1,
-    title: 'App 1',
-    icon: '',
+    title: 'Minecraft',
+    // icon: 'assets/app-icons/minecraft.png',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 1,
-    collectionId: 1,
-    link: '',
-    price: 0,
-    purchases: false
+    collectionId: 2,
+    link: 'https://itunes.apple.com/ru/app/minecraft/id479516143?mt=8',
+    price: 529,
+    purchases: true
   }, {
     id: 2,
     title: 'App 2',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 1,
     collectionId: 1,
     link: '',
@@ -79179,7 +79476,7 @@ exports.default = {
   }, {
     id: 3,
     title: 'App 3',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 2,
     collectionId: 2,
     link: '',
@@ -79189,7 +79486,7 @@ exports.default = {
   }, {
     id: 4,
     title: 'App 4',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 2,
     collectionId: 2,
     link: '',
@@ -79199,7 +79496,7 @@ exports.default = {
   }, {
     id: 5,
     title: 'App 5',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 1,
     collectionId: 3,
     link: '',
@@ -79209,7 +79506,7 @@ exports.default = {
   }, {
     id: 6,
     title: 'App 6',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 1,
     collectionId: 3,
     link: '',
@@ -79219,7 +79516,7 @@ exports.default = {
   }, {
     id: 7,
     title: 'App 7',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 2,
     collectionId: 4,
     link: '',
@@ -79229,14 +79526,144 @@ exports.default = {
   }, {
     id: 8,
     title: 'App 8',
-    icon: '',
+    icon: 'assets/app-icons/sample.png',
     categoryId: 2,
     collectionId: 4,
     link: '',
     price: 0,
     purchases: false,
     devices: [2]
-  }]
+  }, {
+    id: 9,
+    title: 'App 9',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 10,
+    title: 'App 10',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 11,
+    title: 'App 11',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 12,
+    title: 'App 12',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 13,
+    title: 'App 13',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 14,
+    title: 'App 14',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 15,
+    title: 'App 15',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 16,
+    title: 'App 16',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 17,
+    title: 'App 17',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 18,
+    title: 'App 18',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 19,
+    title: 'App 19',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 20,
+    title: 'App 20',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 21,
+    title: 'App 21',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }, {
+    id: 22,
+    title: 'App 22',
+    icon: 'assets/app-icons/sample.png',
+    categoryId: 1,
+    collectionId: 2,
+    link: '',
+    price: 0,
+    purchases: true
+  }],
+  banners: {
+    small: ['assets/banners/small_sample.jpg'],
+    big: ['assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg', 'assets/banners/big_sample.jpg']
+  }
 };
 
 /***/ }),
@@ -79374,7 +79801,8 @@ function mapStateToProps(state) {
     isLoading: state.isLoading,
     apps: state.apps,
     categories: state.categories,
-    collections: state.collections
+    collections: state.collections,
+    banners: state.banners
   };
 }
 
@@ -79427,6 +79855,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _types = __webpack_require__(/*! ../actions/types */ "./src/actions/types.js");
 
+var _data = __webpack_require__(/*! ../data */ "./src/data/index.js");
+
+var _data2 = _interopRequireDefault(_data);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
   interface StoreState {
     selectedDevice: 'iPhone' | 'iPad';
@@ -79434,12 +79868,17 @@ var _types = __webpack_require__(/*! ../actions/types */ "./src/actions/types.js
     apps?: AppEntry[];
     categories?: Category[];
     collections?: Collection[];
+    banners: {
+      small: string[];
+      big: string[];
+    };
   }
 */
 
 var initialState = {
   selectedDevice: 'iPhone',
-  isLoading: false
+  isLoading: false,
+  banners: _data2.default.banners
 };
 
 function rootReducer() {
@@ -79549,7 +79988,7 @@ if(false) {}
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */"./node_modules/babel-polyfill/lib/index.js");
-module.exports = __webpack_require__(/*! C:\work\app-store\src/index.jsx */"./src/index.jsx");
+module.exports = __webpack_require__(/*! D:\work\misc\demo\app-store\src/index.jsx */"./src/index.jsx");
 
 
 /***/ })

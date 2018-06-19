@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'semantic-ui-react';
+import { Image, List } from 'semantic-ui-react';
 import './style';
 
 const BCN = 'app__app-collection__app-item'; // Base Class Name
@@ -15,66 +15,95 @@ const AppItem = ({
   },
   category,
   showFullInfo,
+  showIcon,
+  layout,
 }) => (
-  <div className={BCN}>
-    <Image src={icon} />
-
-    <div className={`${BCN}__title`}>
-      {title}
-    </div>
-
+  <List.Item className={BCN}>
     {
-      typeof category === 'string'
+      showIcon
       &&
-      <div className={`${BCN}__category`}>
-        {category}
-      </div>
-    }
-
-    {
-      showFullInfo !== true
-      &&
-      price > 0
-      &&
-      <div className={`${BCN}__price`}>
-        {`${price} руб.`}
-      </div>
-    }
-
-    {
-      showFullInfo
-      &&
-      <React.Fragment>
+      <List.Icon className={`${BCN}__icon ${BCN}__icon_layout-${layout}`}>
         <a
-          className={`${BCN}__link`}
           href={link}
-          title='Перейти к приложению'
           target='_blank'
           rel='noopener noreferrer'
         >
-          {
-            price > 0
-              ? `${price} руб.`
-              : 'Загрузить'
-          }
+          <Image fluid src={icon} />
         </a>
-
-        {
-          purchases
-          &&
-          <div className={`${BCN}__purchases`}>
-            Встроенные покупки
-          </div>
-        }
-      </React.Fragment>
+      </List.Icon>
     }
-  </div>
+
+    <a
+      href={link}
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <List.Header className={`${BCN}__title`}>
+        {title}
+      </List.Header>
+    </a>
+
+    <List.Content>
+      {
+        typeof category === 'string'
+        &&
+        <div className={`${BCN}__category`}>
+          {category}
+        </div>
+      }
+
+      {
+        showFullInfo !== true
+        &&
+        price > 0
+        &&
+        <div className={`${BCN}__price`}>
+          {`${price} руб.`}
+        </div>
+      }
+
+      {
+        showFullInfo
+        &&
+        <React.Fragment>
+          <a
+            className={`${BCN}__link`}
+            href={link}
+            title='Перейти к приложению'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {
+              price > 0
+                ? `${price} руб.`
+                : 'Загрузить'
+            }
+          </a>
+
+          {
+            purchases
+            &&
+            <div className={`${BCN}__purchases`}>
+              Встроенные покупки
+            </div>
+          }
+        </React.Fragment>
+      }
+    </List.Content>
+  </List.Item>
 );
 
 AppItem.propTypes = {
   app: PropTypes.object.isRequired,
   category: PropTypes.string,
   showFullInfo: PropTypes.bool,
+  showIcon: PropTypes.bool,
+  layout: PropTypes.oneOf(['vertical', 'horizontal']),
+};
+
+AppItem.defaultProps = {
+  showIcon: true,
+  layout: 'vertical',
 };
 
 export default AppItem;

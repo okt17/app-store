@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppCollection from '../AppCollection';
+import Scroller from '../Scroller';
 import Loader from '../Loader';
 import Switcher from '../Switcher';
 import './style';
@@ -13,6 +14,7 @@ class App extends React.PureComponent {
     collections: PropTypes.array,
     fetchAppsForDevice: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
+    banners: PropTypes.object,
   };
   componentDidMount() {
     this.props.fetchAppsForDevice(this.props.selectedDevice);
@@ -25,6 +27,7 @@ class App extends React.PureComponent {
       apps,
       categories,
       collections,
+      banners,
     } = this.props;
 
     return (
@@ -34,13 +37,20 @@ class App extends React.PureComponent {
           &&
           <Loader />
         }
+
         <div className='app__top-content'>
           <Switcher
             selectedDevice={selectedDevice}
             onButtonClick={fetchAppsForDevice}
           />
 
-          <div>BANNERS</div>
+          {
+            banners !== undefined
+            &&
+            Array.isArray(banners.big)
+            &&
+            <Scroller images={banners.big} />
+          }
         </div>
 
         <div className='app__main-content'>
@@ -61,7 +71,25 @@ class App extends React.PureComponent {
         </div>
 
         <div className='app__side-content'>
-          SIDE CONTENT
+          {
+            Array.isArray(apps)
+            &&
+            <React.Fragment>
+              <AppCollection
+                layout='vertical'
+                title='Топ платных приложений'
+                apps={apps.filter(({ price }) => price > 0)}
+                categories={categories}
+              />
+
+              <AppCollection
+                layout='vertical'
+                title='Топ бесплатных приложений'
+                apps={apps.filter(({ price }) => price === 0)}
+                categories={categories}
+              />
+            </React.Fragment>
+          }
         </div>
       </div>
     );
