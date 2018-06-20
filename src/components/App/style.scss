@@ -2,23 +2,46 @@
   height: 100vh;
   overflow: hidden;
 
-  &__top-content {
+  &__top-section {
     height: 20vh;
     padding: 0.5rem;
   }
 
-  &__main-content, &__side-content {
-    float: left;
+  &__main-section, &__side-section {
     height: 80vh;
     padding: 1rem;
-    overflow: auto;
+    float: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  &__main-section {
+    width: 80vw;
   }
 
-  &__main-content {
-    width: 75vw;
+  &__side-section {
+    width: 20vw;
   }
 
-  &__side-content {
-    width: 25vw;
+  &__collections-banners {
+    &__header {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    img {
+      display: inline-block !important;
+      height: 10vh;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+
+      &:not(:last-child) {
+        margin-right: 0.8em;
+      }
+    }
   }
 }

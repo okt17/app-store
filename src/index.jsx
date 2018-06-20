@@ -29,6 +29,10 @@ function mapDispatchToProps(dispatch) {
 
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
+/*
+  вызываем render только после того, как в store
+  установлены categories и collections
+*/
 const unsubscribe = store.subscribe(() => {
   const {
     categories,

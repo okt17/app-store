@@ -1,40 +1,37 @@
 .app__app-collection__app-item {
   vertical-align: top;
   max-width: 96px;
-
   margin-left: 0 !important;
   margin-right: 0.8rem !important;
-  margin-bottom: 0.8rem !important;
+  margin-bottom: 0.4rem !important;
 
   &__icon {
+    cursor: pointer;
     height: 96px !important;
     width: 96px !important;
-    cursor: pointer;
 
     &_layout-horizontal {
       float: left;
-      height: 48px !important;
-      width: 48px !important;
+      height: 56px !important;
+      width: 56px !important;
+    }
+
+    img {
+      border-radius: 20px;
     }
   }
 
   &__title {
     cursor: pointer;
+    font-size: 0.9rem;
+
+    &_layout-vertical {
+      white-space: normal;
+      word-break: break;
+    }
   }
 
   &__category {
     color: grey;
-  }
-
-  &__price {
-
-  }
-
-  &__link {
-
-  }
-
-  &__purchases {
-
   }
 }

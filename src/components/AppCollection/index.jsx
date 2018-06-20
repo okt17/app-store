@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Modal } from 'semantic-ui-react';
+import { List, Modal, Icon } from 'semantic-ui-react';
 import AppItem from './AppItem';
 import './style';
 
@@ -9,7 +9,7 @@ const BCN = 'app__app-collection'; // Base Class Name
 class AppCollection extends React.PureComponent {
   static propTypes = {
     apps: PropTypes.array.isRequired,
-    limit: PropTypes.number, // max number of apps shown (modal shows all of them)
+    limit: PropTypes.number,
     title: PropTypes.string,
     categories: PropTypes.object,
     layout: PropTypes.oneOf(['vertical', 'horizontal']),
@@ -52,12 +52,17 @@ class AppCollection extends React.PureComponent {
             className={`${BCN}__header__action-button`}
             onClick={this.openModal}
           >
-            См. все
+            {
+              layout === 'horizontal'
+                ? 'См. все'
+                : <Icon name='angle right' />
+            }
           </span>
         </div>
 
         <List
           horizontal={layout === 'horizontal'}
+          ordered={layout === 'vertical'}
           nowrap='true'
         >
           {
@@ -79,6 +84,10 @@ class AppCollection extends React.PureComponent {
                     i === 0
                   }
                   layout={
+                    /*
+                      коллекция с горизонтальным layout показывает элементы с вертикальным,
+                      и наоборот
+                    */
                     layout === 'horizontal'
                       ? 'vertical'
                       : 'horizontal'
@@ -94,7 +103,6 @@ class AppCollection extends React.PureComponent {
           className={`${BCN}__modal`}
         >
           {
-            // evaluating modal content only if modal is open
             isModalOpen
             &&
             <div className={`${BCN}__modal__content`}>
@@ -111,7 +119,7 @@ class AppCollection extends React.PureComponent {
                 </span>
               </div>
 
-              <List horizontal className={`${BCN}__list`}>
+              <List horizontal>
                 {
                   apps.map(app => (
                     <AppItem

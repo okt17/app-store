@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, List } from 'semantic-ui-react';
+import { Image, List, Popup } from 'semantic-ui-react';
 import './style';
 
 const BCN = 'app__app-collection__app-item'; // Base Class Name
@@ -22,15 +22,20 @@ const AppItem = ({
     {
       showIcon
       &&
-      <List.Icon className={`${BCN}__icon ${BCN}__icon_layout-${layout}`}>
-        <a
-          href={link}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Image fluid src={icon} />
-        </a>
-      </List.Icon>
+      <Popup
+        trigger={
+          <List.Icon className={`${BCN}__icon ${BCN}__icon_layout-${layout}`}>
+            <a
+              href={link}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Image fluid src={icon} />
+            </a>
+          </List.Icon>
+        }
+        content={title}
+      />
     }
 
     <a
@@ -38,7 +43,7 @@ const AppItem = ({
       target='_blank'
       rel='noopener noreferrer'
     >
-      <List.Header className={`${BCN}__title`}>
+      <List.Header className={`${BCN}__title ${BCN}__title_layout-${layout}`}>
         {title}
       </List.Header>
     </a>
@@ -53,13 +58,13 @@ const AppItem = ({
       }
 
       {
+        layout === 'vertical'
+        &&
         showFullInfo !== true
         &&
         price > 0
         &&
-        <div className={`${BCN}__price`}>
-          {`${price} руб.`}
-        </div>
+        <div>{`${price} руб.`}</div>
       }
 
       {
@@ -67,7 +72,6 @@ const AppItem = ({
         &&
         <React.Fragment>
           <a
-            className={`${BCN}__link`}
             href={link}
             title='Перейти к приложению'
             target='_blank'
@@ -83,9 +87,7 @@ const AppItem = ({
           {
             purchases
             &&
-            <div className={`${BCN}__purchases`}>
-              Встроенные покупки
-            </div>
+            <div>Встроенные покупки</div>
           }
         </React.Fragment>
       }

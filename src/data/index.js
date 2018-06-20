@@ -1,337 +1,171 @@
+import getConvertedApps from './getConvertedApps';
+
 /*
+  // Typescript интерфейсы в качестве псевдокода - описание моделей данных
+
+  // все данные
   interface Data {
     apps: AppEntry[];
     categories: Category[];
     collections: Collection[];
     devices: Device[];
-    banners: {
-      big: string[];
-      small: string[];
-    };
+    banners: string[];
   }
 
+  // данные об одном приложении
   interface AppEntry {
-    id: number; // Primary Key - integer
-    title: string;
-    icon: string; // icon URL
-    categoryId: number: // Foreign Key - integer
+    id: number; // Primary Key
+    title: string; // название
+    icon: string; // URL иконки
+    categoryId: number: // Foreign Key
     collectionId: number; // Foreign Key
-    link: string; // href
-    price: number; // 0 if free
-    purchases: boolean; // in-app purchases
-    devices?: number[]; // list of Foreign Keys - device ID's
+    link: string; // ссылка
+    price: number; // цена. 0 - бесплатно
+    purchases: boolean; // наличие покупок в приложении
+    devices?: number[]; // список поддерживаемых устройств. Если undefined - поддерживается все
+    pos_curr: number; // позиция в рейтинге
   }
 
+  // данные о категории приложений
   interface Category {
     id: number;
     title: string;
   }
 
+  // данные о коллекции приложений
   interface Collection {
     id: number;
     title: string;
+    banner?: string; // URL баннера
   }
 
+  // данные об устройстве
   interface Device {
     id: number;
     title: string;
   }
 */
 
-export default {
-  devices: [
-    {
-      id: 1,
-      title: 'iPhone',
-    },
-    {
-      id: 2,
-      title: 'iPad',
-    },
-  ],
-  categories: [
-    {
-      id: 1,
-      title: 'Игры',
-    },
-    {
-      id: 2,
-      title: 'Приложения',
-    },
-  ],
-  collections: [
-    {
-      id: 1,
-      title: 'Новое и интересное',
-    },
-    {
-      id: 2,
-      title: 'Любителям классики',
-    },
-    {
-      id: 3,
-      title: 'Вам может понравиться',
-    },
-    {
-      id: 4,
-      title: 'Фавориты прошлых недель',
-    },
-  ],
-  apps: [
-    {
-      id: 1,
-      title: 'Minecraft',
-      // icon: 'assets/app-icons/minecraft.png',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: 'https://itunes.apple.com/ru/app/minecraft/id479516143?mt=8',
-      price: 529,
-      purchases: true,
-    },
-    {
-      id: 2,
-      title: 'App 2',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 1,
-      link: '',
-      price: 0,
-      purchases: false,
-      devices: [1],
-    },
-    {
-      id: 3,
-      title: 'App 3',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 2,
-      collectionId: 2,
-      link: '',
-      price: 2.50,
-      purchases: true,
-      devices: [2],
-    },
-    {
-      id: 4,
-      title: 'App 4',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 2,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: false,
-      devices: [1],
-    },
-    {
-      id: 5,
-      title: 'App 5',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 3,
-      link: '',
-      price: 0,
-      purchases: false,
-      devices: [1, 2],
-    },
-    {
-      id: 6,
-      title: 'App 6',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 3,
-      link: '',
-      price: 0,
-      purchases: false,
-      devices: [2],
-    },
-    {
-      id: 7,
-      title: 'App 7',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 2,
-      collectionId: 4,
-      link: '',
-      price: 0,
-      purchases: false,
-      devices: [1, 2],
-    },
-    {
-      id: 8,
-      title: 'App 8',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 2,
-      collectionId: 4,
-      link: '',
-      price: 0,
-      purchases: false,
-      devices: [2],
-    },
-    {
-      id: 9,
-      title: 'App 9',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 10,
-      title: 'App 10',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 11,
-      title: 'App 11',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 12,
-      title: 'App 12',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 13,
-      title: 'App 13',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 14,
-      title: 'App 14',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 15,
-      title: 'App 15',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 16,
-      title: 'App 16',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 17,
-      title: 'App 17',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 18,
-      title: 'App 18',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 19,
-      title: 'App 19',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 20,
-      title: 'App 20',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 21,
-      title: 'App 21',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-    {
-      id: 22,
-      title: 'App 22',
-      icon: 'assets/app-icons/sample.png',
-      categoryId: 1,
-      collectionId: 2,
-      link: '',
-      price: 0,
-      purchases: true,
-    },
-  ],
-  banners: {
-    small: [
-      'assets/banners/small_sample.jpg',
-      // 'assets/banners/small_1.jpg',
-      // 'assets/banners/small_2.jpg',
-      // 'assets/banners/small_3.jpg',
-    ],
-    big: [
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      'assets/banners/big_sample.jpg',
-      // 'assets/banners/big_1.jpg',
-      // 'assets/banners/big_2.jpg',
-      // 'assets/banners/big_3.jpg',
-    ],
+const devices = [
+  {
+    id: 1,
+    title: 'iPhone',
   },
+  {
+    id: 2,
+    title: 'iPad',
+  },
+];
+
+const categories = [
+  {
+    id: 1,
+    title: 'Приложения',
+  },
+  {
+    id: 2,
+    title: 'Интересное',
+  },
+  {
+    id: 3,
+    title: 'Популярное',
+  },
+  {
+    id: 4,
+    title: 'Удобства',
+  },
+];
+
+const collections = [
+  {
+    id: 1,
+    title: 'Новое и интересное',
+    banner: 'assets/banners/small_1.jpg',
+  },
+  {
+    id: 2,
+    title: 'Любителям классики',
+    banner: 'assets/banners/small_2.jpg',
+  },
+  {
+    id: 3,
+    title: 'Вам может понравиться',
+    banner: 'assets/banners/small_3.jpg',
+  },
+  {
+    id: 4,
+    title: 'Фавориты прошлых недель',
+    banner: 'assets/banners/small_1.jpg',
+  },
+  {
+    id: 5,
+    title: 'Коллекция 1',
+    banner: 'assets/banners/small_2.jpg',
+  },
+  {
+    id: 6,
+    title: 'Коллекция 2',
+    banner: 'assets/banners/small_3.jpg',
+  },
+  {
+    id: 7,
+    title: 'Коллекция 3',
+    banner: 'assets/banners/small_1.jpg',
+  },
+  {
+    id: 8,
+    title: 'Коллекция 4',
+    banner: 'assets/banners/small_2.jpg',
+  },
+  {
+    id: 9,
+    title: 'Коллекция 5',
+    banner: 'assets/banners/small_3.jpg',
+  },
+  {
+    id: 10,
+    title: 'Коллекция 6',
+    banner: 'assets/banners/small_1.jpg',
+  },
+  {
+    id: 11,
+    title: 'Коллекция 7',
+    banner: 'assets/banners/small_2.jpg',
+  },
+  {
+    id: 12,
+    title: 'Коллекция 8',
+    banner: 'assets/banners/small_3.jpg',
+  },
+];
+
+const banners = [
+  'assets/banners/big_1.jpg',
+  'assets/banners/big_2.jpg',
+  'assets/banners/big_3.jpg',
+  'assets/banners/big_1.jpg',
+  'assets/banners/big_2.jpg',
+  'assets/banners/big_3.jpg',
+  'assets/banners/big_1.jpg',
+  'assets/banners/big_2.jpg',
+  'assets/banners/big_3.jpg',
+  'assets/banners/big_1.jpg',
+  'assets/banners/big_2.jpg',
+  'assets/banners/big_3.jpg',
+  'assets/banners/big_1.jpg',
+  'assets/banners/big_2.jpg',
+  'assets/banners/big_3.jpg',
+];
+
+const apps = getConvertedApps({
+  maxCategoryId: categories.length,
+  maxCollectionId: collections.length,
+});
+
+export default {
+  devices,
+  categories,
+  collections,
+  apps,
+  banners,
 };

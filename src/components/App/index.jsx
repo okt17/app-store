@@ -1,10 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Image } from 'semantic-ui-react';
 import AppCollection from '../AppCollection';
 import Scroller from '../Scroller';
 import Loader from '../Loader';
 import Switcher from '../Switcher';
 import './style';
+
+const renderCollections = (
+  collections,
+  apps,
+  categories,
+) => collections.map(({ id, title }) => (
+  <AppCollection
+    key={id}
+    title={title}
+    apps={apps.filter(({ collectionId }) => collectionId === id)}
+    categories={categories}
+  />
+));
 
 class App extends React.PureComponent {
   static propTypes = {
@@ -14,7 +28,7 @@ class App extends React.PureComponent {
     collections: PropTypes.array,
     fetchAppsForDevice: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
-    banners: PropTypes.object,
+    banners: PropTypes.array,
   };
   componentDidMount() {
     this.props.fetchAppsForDevice(this.props.selectedDevice);
@@ -38,39 +52,51 @@ class App extends React.PureComponent {
           <Loader />
         }
 
-        <div className='app__top-content'>
+        <div className='app__top-section'>
           <Switcher
             selectedDevice={selectedDevice}
             onButtonClick={fetchAppsForDevice}
           />
 
           {
-            banners !== undefined
+            Array.isArray(banners)
             &&
-            Array.isArray(banners.big)
-            &&
-            <Scroller images={banners.big} />
+            <Scroller images={banners} />
           }
         </div>
 
-        <div className='app__main-content'>
+        <div className='app__main-section'>
           {
             Array.isArray(collections)
             &&
             Array.isArray(apps)
             &&
-            collections.map(({ id, title }) => (
-              <AppCollection
-                key={id}
-                title={title}
-                apps={apps.filter(({ collectionId }) => collectionId === id)}
-                categories={categories}
-              />
-            ))
+            <React.Fragment>
+              {/*
+                2 (или менее) коллекции приложений,
+                затем баннеры приложений,
+                затем остальные коллекции
+              */}
+
+              {renderCollections(collections.slice(0, 2), apps, categories)}
+
+              <div className='app__collections-banners'>
+                <div className='app__collections-banners__header'>
+                  Популярные коллекции
+                </div>
+
+                {
+                  collections.filter(({ banner }) => typeof banner === 'string')
+                    .map(({ id, banner }) => <Image key={id} src={banner} />)
+                }
+              </div>
+
+              {renderCollections(collections.slice(2), apps, categories)}
+            </React.Fragment>
           }
         </div>
 
-        <div className='app__side-content'>
+        <div className='app__side-section'>
           {
             Array.isArray(apps)
             &&
@@ -78,15 +104,23 @@ class App extends React.PureComponent {
               <AppCollection
                 layout='vertical'
                 title='Топ платных приложений'
-                apps={apps.filter(({ price }) => price > 0)}
+                apps={
+                  apps.filter(({ price }) => price > 0)
+                    .sort((app1, app2) => app1.pos_curr - app2.pos_curr)
+                }
                 categories={categories}
+                limit={9}
               />
 
               <AppCollection
                 layout='vertical'
                 title='Топ бесплатных приложений'
-                apps={apps.filter(({ price }) => price === 0)}
+                apps={
+                  apps.filter(({ price }) => price === 0)
+                    .sort((app1, app2) => app1.pos_curr - app2.pos_curr)
+                }
                 categories={categories}
+                limit={9}
               />
             </React.Fragment>
           }

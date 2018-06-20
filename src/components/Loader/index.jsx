@@ -12,6 +12,7 @@ const Loader = ({ message }) => (
       inline='centered'
       size='small'
     />
+
     {message}
   </div>
 );

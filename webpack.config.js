@@ -45,7 +45,7 @@ module.exports = {
       app: APP_DIR
     },
     enforceExtension: false,
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss', '.json']
   },
   devtool: 'source-map'
 };

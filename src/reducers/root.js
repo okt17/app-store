@@ -8,16 +8,15 @@ import {
 import DATA from '../data';
 
 /*
+  // модель состояния приложения (хранилища)
+
   interface StoreState {
     selectedDevice: 'iPhone' | 'iPad';
     isLoading: boolean;
     apps?: AppEntry[];
     categories?: Category[];
     collections?: Collection[];
-    banners: {
-      small: string[];
-      big: string[];
-    };
+    banners: string[];
   }
 */
 
@@ -27,8 +26,8 @@ const initialState = {
   banners: DATA.banners,
 };
 
-function rootReducer(state = initialState, action) {
-  switch (action.type) {
+function rootReducer(state = initialState, { type, payload }) {
+  switch (type) {
     case FETCH_APPS_FOR_DEVICE:
       return {
         ...state,
@@ -38,27 +37,27 @@ function rootReducer(state = initialState, action) {
     case SET_DEVICE:
       return {
         ...state,
-        device: action.payload,
+        device: payload,
       };
 
     case SET_APPS:
       return {
         ...state,
-        apps: action.payload.apps,
-        selectedDevice: action.payload.device,
+        apps: payload.apps,
+        selectedDevice: payload.device,
         isLoading: false,
       };
 
     case SET_CATEGORIES:
       return {
         ...state,
-        categories: action.payload,
+        categories: payload,
       };
 
     case SET_COLLECTIONS:
       return {
         ...state,
-        collections: action.payload,
+        collections: payload,
       };
 
     default:

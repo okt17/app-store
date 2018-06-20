@@ -31,14 +31,14 @@ function getCollections(data/* , params={} */) {
 }
 
 /**
- * Mimics an HTTP request behavior
+ * Функция воссоздает поведение HTTP-запроса в виде Promise
  * @param {string} baseUrl 'apps' | 'categories' | 'collections'
- * @param {object} params request parameters
+ * @param {object} params параметры запроса
  * @return Promise<{ results: object[] }>
 */
 function requestData(baseUrl, params) {
   return new Promise((resolve, reject) => {
-    const delay = 1000 * Math.random(); // handle requests after up to 1 second
+    const delay = 1000 * Math.random(); // обработка запроса спустя от 0 до 1 секунд
 
     let results;
 

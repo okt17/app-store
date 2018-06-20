@@ -7,30 +7,17 @@ const BCN = 'app__banners-view'; // Base Class Name
 
 class Scroller extends React.PureComponent {
   static propTypes = {
-    images: PropTypes.array.isRequired, // array of image URL's
-    scrollInterval: PropTypes.number, // scroll left or right every {scrollInterval} ms
+    images: PropTypes.array.isRequired, // массив URL изображений
+    scrollInterval: PropTypes.number, // автоскролл каждые {scrollInterval} мс
   };
   static defaultProps = {
-    scrollInterval: 3000,
+    scrollInterval: 5000,
   };
   componentDidMount() {
     this.intervalId = setInterval(
-      () => {
-        if (this.currentImgIndex > 0 && Math.random() > 0.5) {
-          this.scrollLeft();
-        } else {
-          this.scrollRight();
-        }
-      },
+      this.scrollToRandomImage,
       this.props.scrollInterval,
     );
-
-    const imgs = this.getImgs();
-    if (imgs.length > 0) {
-      // scroll somewhere to the middle initially
-      this.currentImgIndex = Math.floor(imgs.length / 2);
-      imgs[this.currentImgIndex].scrollIntoView({ block: 'end' });
-    }
   }
   componentWillUnmount() {
     clearInterval(this.intervalId);
@@ -41,26 +28,29 @@ class Scroller extends React.PureComponent {
       : []
   );
   ref = React.createRef();
+  scrollToImage = (index, imgs = this.getImgs()) => {
+    const img = imgs[index];
+
+    if (img !== undefined) {
+      this.currentImgIndex = index;
+      img.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  };
+  scrollToRandomImage = () => {
+    const imgs = this.getImgs();
+    const index = Math.floor(Math.random() * imgs.length);
+
+    this.scrollToImage(index, imgs);
+  };
   scrollLeft = () => {
     if (this.currentImgIndex > 0) {
-      const imgs = this.getImgs();
-      const img = imgs[this.currentImgIndex - 1];
-      if (img !== undefined) {
-        this.currentImgIndex -= 1;
-        img.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      this.scrollToImage(this.currentImgIndex - 1);
     }
   };
   scrollRight = () => {
     const imgs = this.getImgs();
-    if (this.currentImgIndex < imgs.length) {
-      const img = imgs[this.currentImgIndex + 1];
-      if (img !== undefined) {
-        this.currentImgIndex += 1;
-        img.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }
-    } else {
-      this.currentImgIndex = imgs.length;
+    if (this.currentImgIndex + 1 < imgs.length) {
+      this.scrollToImage(this.currentImgIndex + 1, imgs);
     }
   };
   render() {
@@ -79,8 +69,8 @@ class Scroller extends React.PureComponent {
           images.map((url, i) => (
             <Image
               className={`${BCN}__image`}
-              key={String(i)}
               src={url}
+              key={String(i)}
             />
           ))
         }
