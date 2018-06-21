@@ -33,7 +33,9 @@ function getCollections(data/* , params={} */) {
 /**
  * Функция воссоздает поведение HTTP-запроса в виде Promise
  * @param {string} baseUrl 'apps' | 'categories' | 'collections'
- * @param {object} params параметры запроса
+ * @param {object} params параметры запроса.
+ * Параметры запроса для apps:
+ *   device - название устройства 'iPhone' | 'iPad'
  * @return Promise<{ results: object[] }>
 */
 function requestData(baseUrl, params) {

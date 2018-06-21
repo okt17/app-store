@@ -1,10 +1,9 @@
 import { result as iPhoneApps } from './iPhoneApps';
 import { result as iPadApps } from './iPadApps';
-
 /* eslint-disable camelcase */
 
 /*
-  Приведем данные с https://appfollow.io/rankings/top.json (POST)
+  Приведем данные, полученные с https://appfollow.io/rankings/top.json (POST)
   к нашей модели, описанной в data/index.js
 */
 
@@ -20,21 +19,24 @@ const parsePrice = (price) => {
   return 0;
 };
 
-const getDevices = (id, deviceOneApps, deviceTwoApps) => {
-  const filter = ({ ext_id }) => ext_id === id;
-  const deviceOne = deviceOneApps.find(filter) !== undefined;
-  const deviceTwo = deviceTwoApps.find(filter) !== undefined;
+/*
+  Возвращает список порядковых номеров устройств для приложения,
+  используя списки приложений для каждого устройства
+*/
+const getDevices = (appId, ...deviceApps) => {
+  const filter = ({ ext_id }) => ext_id === appId;
 
-  if (deviceOne && deviceTwo) {
-    return [1, 2];
-  } else if (deviceOne) {
-    return [1];
-  }
+  return deviceApps.reduce((acc, appsForDevice, i) => {
+    if (appsForDevice.find(filter) !== undefined) {
+      acc.push(i + 1);
+    }
 
-  return [2];
+    return acc;
+  }, []);
 };
 
-const convert = (maxCategoryId, maxCollectionId) => ({
+
+const convertApp = (maxCategoryId, maxCollectionId) => ({
   ext_id,
   title,
   icon,
@@ -55,6 +57,7 @@ const convert = (maxCategoryId, maxCollectionId) => ({
   devices: getDevices(ext_id, iPhoneApps, iPadApps),
 });
 
+// вовзращает новый массив объектов с уникальными ext_id
 const removeDuplicates = (array) => {
   const seen = {};
 
@@ -72,7 +75,7 @@ const removeDuplicates = (array) => {
 const apps = removeDuplicates([...iPhoneApps, ...iPadApps]);
 
 const getConvertedApps = ({ maxCategoryId, maxCollectionId }) => (
-  apps.map(convert(maxCategoryId, maxCollectionId))
+  apps.map(convertApp(maxCategoryId, maxCollectionId))
 );
 
 export default getConvertedApps;

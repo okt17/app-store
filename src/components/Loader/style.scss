@@ -3,6 +3,7 @@
   text-align: center;
   top: 0.5rem;
   left: 50%;
+  transform: translateX(-50%);
 
   &__loader {
     display: inline-block !important;

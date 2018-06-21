@@ -73,7 +73,7 @@ class App extends React.PureComponent {
             &&
             <React.Fragment>
               {/*
-                2 (или менее) коллекции приложений,
+                Рендерим 2 (или менее) коллекции приложений,
                 затем баннеры приложений,
                 затем остальные коллекции
               */}
@@ -85,10 +85,12 @@ class App extends React.PureComponent {
                   Популярные коллекции
                 </div>
 
-                {
-                  collections.filter(({ banner }) => typeof banner === 'string')
-                    .map(({ id, banner }) => <Image key={id} src={banner} />)
-                }
+                <div className='app__collections-banners__content'>
+                  {
+                    collections.filter(({ banner }) => typeof banner === 'string')
+                      .map(({ id, banner }) => <Image key={id} src={banner} />)
+                  }
+                </div>
               </div>
 
               {renderCollections(collections.slice(2), apps, categories)}

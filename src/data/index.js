@@ -72,7 +72,7 @@ const categories = [
   },
   {
     id: 4,
-    title: 'Удобства',
+    title: 'Удобное',
   },
 ];
 
@@ -120,21 +120,6 @@ const collections = [
   {
     id: 9,
     title: 'Коллекция 5',
-    banner: 'assets/banners/small_3.jpg',
-  },
-  {
-    id: 10,
-    title: 'Коллекция 6',
-    banner: 'assets/banners/small_1.jpg',
-  },
-  {
-    id: 11,
-    title: 'Коллекция 7',
-    banner: 'assets/banners/small_2.jpg',
-  },
-  {
-    id: 12,
-    title: 'Коллекция 8',
     banner: 'assets/banners/small_3.jpg',
   },
 ];

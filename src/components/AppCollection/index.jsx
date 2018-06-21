@@ -54,9 +54,11 @@ class AppCollection extends React.PureComponent {
           >
             {
               layout === 'horizontal'
-                ? 'См. все'
-                : <Icon name='angle right' />
+              &&
+              'См. все'
             }
+
+            <Icon name='angle right' />
           </span>
         </div>
 
@@ -85,7 +87,7 @@ class AppCollection extends React.PureComponent {
                   }
                   layout={
                     /*
-                      коллекция с горизонтальным layout показывает элементы с вертикальным,
+                      коллекция с горизонтальным layout показывает элементы с вертикальным
                       и наоборот
                     */
                     layout === 'horizontal'
