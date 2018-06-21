@@ -63,6 +63,7 @@ class AppCollection extends React.PureComponent {
         </div>
 
         <List
+          className={`${BCN}__content`}
           horizontal={layout === 'horizontal'}
           ordered={layout === 'vertical'}
           nowrap='true'
